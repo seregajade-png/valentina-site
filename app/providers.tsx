@@ -1,13 +1,8 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { CustomCursor, SmoothScroll } from "./lib/motion";
+import { SmoothScroll } from "./lib/motion";
 
 export function Providers({ children }: { children: ReactNode }) {
-  return (
-    <SmoothScroll>
-      <CustomCursor />
-      {children}
-    </SmoothScroll>
-  );
+  return <SmoothScroll>{children}</SmoothScroll>;
 }

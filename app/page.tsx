@@ -2,70 +2,85 @@ import Image from "next/image";
 import { ContactForm } from "./contact-form";
 import { ClipReveal, Magnetic, MotionPhoto, Reveal, RevealItem, RevealStagger } from "./lib/motion";
 
-const NB = " ";
+const NB = " ";
 
-const HERO_BAND = [
-  "Эргономика пространства",
-  "Авторский надзор",
-  "Натуральные материалы",
-  "Скидки партнёров до 30%",
-  "3D-визуализация",
-  "Технические чертежи",
+const WHY = [
+  {
+    n: "01",
+    title: "Архитектурное образование",
+    text: `Я${NB}— дизайнер с${NB}профильным архитектурным образованием и${NB}11${NB}годами практики. Создаю не${NB}просто красивые интерьеры, а${NB}эргономичные пространства.`,
+  },
+  {
+    n: "02",
+    title: "Инженерная точность",
+    text: `Работаю в${NB}паре с${NB}инженером, который разрабатывает безупречные чертежи. Для${NB}строителей${NB}— понятная инструкция, для${NB}вас${NB}— гарантия точной реализации.`,
+  },
+  {
+    n: "03",
+    title: "Без стресса на стройке",
+    text: `У${NB}меня есть проверенные годами строительные бригады и${NB}надёжные поставщики. Не${NB}придётся искать подрядчиков и${NB}переплачивать.`,
+  },
+  {
+    n: "04",
+    title: "Скидки до 30%",
+    text: `Эксклюзивные партнёрские скидки на${NB}материалы и${NB}мебель помогут существенно оптимизировать ваш бюджет${NB}— до${NB}30${NB}% от${NB}розничных цен.`,
+  },
+];
+
+const PROJECTS = [
+  { src: "/assets/projects/living-3.jpg", title: "Тёплый минимализм", sub: "ЖК «Нева» · СПб · 2024" },
+  { src: "/assets/projects/living-7.jpg", title: `Дом в${NB}сосновом бору`, sub: "Ленобласть · 2023" },
+  { src: "/assets/projects/kitchen-3.jpg", title: `Студия у${NB}воды`, sub: "Васильевский о-в · 2024" },
+  { src: "/assets/projects/kitchen-7.jpg", title: `Свет и${NB}камень`, sub: "Центр · СПб · 2024" },
+];
+
+const SERVICES = [
+  { n: "01", title: "Планировочное решение", desc: `Точная планировка, расстановка мебели и${NB}освещения, демонтаж и${NB}монтаж перегородок.`, price: "1 000", unit: "₽/м²" },
+  { n: "02", title: `Смарт-проект с${NB}ПИ`, desc: "Планировка плюс полный пакет инженерных решений: электрика, сантехника, освещение.", price: "2 500", unit: "₽/м²" },
+  { n: "03", title: `Эскизный проект с${NB}визуализацией`, desc: `Стилевая концепция и${NB}фотореалистичные 3D-визуализации каждой комнаты${NB}— до${NB}последней лампы.`, price: "3 000", unit: "₽/м²" },
+  { n: "04", title: `Эскизный проект с${NB}чертежами`, desc: `Концепция и${NB}полный пакет рабочих чертежей для${NB}строительной бригады со${NB}спецификациями.`, price: "3 000", unit: "₽/м²" },
+  { n: "05", title: `Проект под${NB}ключ`, desc: `Концепция, визуализация, рабочие чертежи и${NB}спецификации${NB}— всё в${NB}одном пакете «всё включено».`, price: "4 000", unit: "₽/м²" },
+  { n: "06", title: "Авторский надзор", desc: `Контроль ремонта, выезды на${NB}объект, согласование с${NB}бригадой, поставщиками и${NB}логистика.`, price: "45 000", unit: "₽/мес" },
 ];
 
 const STEPS = [
-  { num: "01", word: "Шаг первый", title: "Обмер", text: "Точные замеры помещения и создание исходного чертежа.", accent: false },
-  { num: "02", word: "Шаг второй", title: "Тех. задание", text: "Фиксация ваших пожеланий, привычек и бюджета.", accent: false },
-  { num: "03", word: "Шаг третий", title: "Планировка", text: "Зонирование, расстановка мебели и 3D-обзор с комментариями дизайнера.", accent: true },
-  { num: "04", word: "Шаг четвёртый", title: "Визуализация", text: "Фотореалистичные 3D-эскизы каждой комнаты — до последней лампы.", accent: false },
-  { num: "05", word: "Шаг пятый", title: "Рабочие чертежи", text: "Полный пакет технической документации для строительной бригады.", accent: false },
-  { num: "06", word: "Шаг шестой", title: "Выдача альбома", text: "Готовый дизайн-проект в печатном и электронном виде.", accent: false },
-  { num: "07", word: "Шаг седьмой", title: "Авторский надзор", text: "Контроль ремонта и хода работ для точного воплощения идеи в жизнь.", accent: true },
+  { n: "01", title: `Обмер и${NB}тех. задание`, text: `Точные замеры помещения, фотофиксация и${NB}беседа о${NB}ваших привычках, сценариях, бюджете. На${NB}этом этапе складывается портрет дома.` },
+  { n: "02", title: `Планировка и${NB}концепция`, text: `2–3 варианта планировок, зонирование, расстановка мебели и${NB}стилевое решение. Согласовываем направление, прежде${NB}чем идти в${NB}3D.` },
+  { n: "03", title: `Визуализация в${NB}3D`, text: `Фотореалистичные ракурсы каждой комнаты${NB}— с${NB}реальной мебелью, светом и${NB}материалами. Можно «прожить» интерьер до${NB}старта ремонта.` },
+  { n: "04", title: "Рабочие чертежи", text: `Полный пакет технической документации: планы, развёртки, узлы, схемы электрики и${NB}сантехники. По${NB}нему бригада строит без${NB}вопросов.` },
+  { n: "05", title: `Закупка и${NB}логистика`, text: `Подбор поставщиков, оформление заказов с${NB}партнёрскими скидками до${NB}30%, отслеживание сроков и${NB}доставка на${NB}объект.` },
+  { n: "06", title: "Авторский надзор", text: `Регулярные выезды на${NB}объект, контроль точности воплощения, оперативные правки. Я${NB}остаюсь рядом до${NB}последнего штриха.` },
 ];
 
-const FAQS = [
+const QFEATS = [
   {
-    q: `Работаете${NB}ли вы${NB}с${NB}заказчиками из${NB}других${NB}городов?`,
-    a: `Да. Около половины моих проектов${NB}— дистанционные. Замер делает мой партнёр или${NB}сертифицированный замерщик в${NB}вашем городе, дальше всё веду онлайн${NB}— от${NB}концепции до${NB}авторского надзора через регулярные видеовстречи с${NB}прорабом.`,
-    open: true,
+    title: `Ответ в${NB}течение 30${NB}минут`,
+    desc: `В${NB}будни с${NB}9:00 до${NB}21:00, в${NB}остальное время${NB}— утром следующего дня.`,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
   },
   {
-    q: `Какой срок разработки полного дизайн-проекта?`,
-    a: `В${NB}среднем${NB}— от${NB}8 до${NB}14 недель в${NB}зависимости от${NB}площади и${NB}сложности. Планировочное решение с${NB}3D-обзором${NB}— 2–3 недели.`,
-    open: false,
+    title: "Бесплатная консультация",
+    desc: `До${NB}часа разбора${NB}— онлайн или${NB}на${NB}объекте. Без${NB}обязательств.`,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
   },
   {
-    q: `Что входит в${NB}смету и${NB}как${NB}она${NB}считается?`,
-    a: `Стоимость рассчитывается за${NB}м² жилой площади и${NB}фиксируется в${NB}договоре до${NB}старта. В${NB}неё входит весь объём работ по${NB}выбранному пакету${NB}— без${NB}скрытых доплат за${NB}«дополнительные правки» или${NB}«ещё одну визуализацию».`,
-    open: false,
-  },
-  {
-    q: `Можно${NB}ли заказать только визуализацию?`,
-    a: `Да, если у${NB}вас уже есть планировка и${NB}концепция. Стоимость${NB}— от${NB}6${NB}500${NB}₽ за${NB}ракурс, минимум 4 ракурса на${NB}помещение.`,
-    open: false,
-  },
-  {
-    q: `Какие гарантии вы${NB}даёте на${NB}реализацию?`,
-    a: `На${NB}все строительно-отделочные работы${NB}— 24${NB}месяца. На${NB}инженерные системы${NB}— по${NB}паспортам производителей. Все обязательства закреплены договором и${NB}актом приёма-передачи.`,
-    open: false,
+    title: "Прозрачная смета",
+    desc: `КП с${NB}точной разбивкой по${NB}этапам, без${NB}«звёздочек» и${NB}скрытых строк.`,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
+      </svg>
+    ),
   },
 ];
-
-function Photo({
-  src,
-  alt,
-  sizes = "(max-width: 980px) 100vw, 60vw",
-  priority = false,
-  clip = true,
-}: {
-  src: string;
-  alt: string;
-  sizes?: string;
-  priority?: boolean;
-  clip?: boolean;
-}) {
-  return <MotionPhoto src={src} alt={alt} sizes={sizes} priority={priority} clip={clip} />;
-}
 
 export default function Page() {
   return (
@@ -73,471 +88,395 @@ export default function Page() {
       {/* NAV */}
       <nav
         className="sticky top-0 z-50 border-b border-line backdrop-blur-md"
-        style={{ background: "rgba(28,25,22,.78)" }}
+        style={{ background: "rgba(26,26,26,.82)" }}
       >
-        <div className="mx-auto flex h-[74px] max-w-[1240px] items-center justify-between px-8">
-          <a href="#" className="flex items-center gap-3">
+        <div className="mx-auto flex h-24 max-w-[1280px] items-center justify-between gap-12 px-8">
+          <a href="#" className="flex items-center">
             <Image
               src="/assets/logo-valentina.png"
-              alt="Valentina Interior Design"
-              width={108}
-              height={54}
-              className="h-[54px] w-auto"
+              alt="Valentina Захрялова"
+              width={148}
+              height={74}
+              className="h-[74px] w-auto"
               style={{ filter: "brightness(0) invert(1)" }}
               priority
             />
           </a>
-          <ul className="hidden gap-9 text-[13px] text-ink-dim md:flex">
-            <li><a href="#projects" className="transition hover:text-accent">Проекты</a></li>
-            <li><a href="#services" className="transition hover:text-accent">Услуги</a></li>
-            <li><a href="#process" className="transition hover:text-accent">Процесс</a></li>
-            <li><a href="#about" className="transition hover:text-accent">О студии</a></li>
-            <li><a href="#contacts" className="transition hover:text-accent">Контакты</a></li>
+          <ul className="hidden list-none items-center gap-2 p-0 text-[13px] text-ink-dim md:flex">
+            <NavLink href="#about">Мы</NavLink>
+            <NavLink href="#projects">Проекты</NavLink>
+            <NavLink href="#services">Услуги</NavLink>
+            <li>
+              <a
+                href="#contacts"
+                className="inline-block rounded-full bg-grey px-4 py-2.5 tracking-[.04em] text-ink transition hover:bg-accent hover:text-[#1a1a1a]"
+                style={{ fontWeight: 400 }}
+              >
+                Контакты
+              </a>
+            </li>
           </ul>
-          <div className="flex items-center gap-6">
-            <span className="hidden text-[13px] tracking-[.04em] text-ink lg:inline">+7 982 961 01 31</span>
-            <Magnetic strength={0.2}>
-              <a href="#cta" className="btn-primary">Обсудить проект</a>
-            </Magnetic>
-          </div>
+          <a href="tel:+79829610131" className="text-[14px] font-normal tracking-[.04em] text-ink whitespace-nowrap">
+            +7&nbsp;982&nbsp;961&nbsp;01&nbsp;31
+          </a>
         </div>
       </nav>
 
       {/* HERO */}
-      <header className="pt-16">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="grid items-end gap-12 md:grid-cols-[1.1fr_.9fr]">
-            <RevealStagger>
-              <RevealItem>
-                <h1 className="h-display mb-7">
-                  <span className="mb-6 block text-[14px] font-normal uppercase tracking-[.22em] text-accent">
-                    Студия дизайна интерьера
-                  </span>
-                  Создаю дома, в которых{NB}<em>хочется{NB}жить</em>, а{NB}не просто{NB}находиться.
-                </h1>
-              </RevealItem>
-              <RevealItem>
-                <p className="lede">
-                  Архитектурный подход, инженерная точность и{NB}11 лет опыта. Веду проект от{NB}первого{NB}замера до{NB}последнего штриха{NB}— и{NB}остаюсь рядом, пока вы{NB}не{NB}скажете «дома».
-                </p>
-              </RevealItem>
-              <RevealItem>
-                <div className="mt-8 flex flex-wrap items-center gap-3.5">
-                  <Magnetic strength={0.25}>
-                    <a href="#cta" className="btn-primary">Записаться на консультацию <span>→</span></a>
-                  </Magnetic>
-                  <a href="#projects" className="btn-ghost">Смотреть проекты</a>
-                </div>
-              </RevealItem>
-              <RevealItem>
-                <div className="mt-10 flex flex-wrap gap-12 border-t border-line pt-7">
-                  <Stat num="11" label={`лет в${NB}профессии`} />
-                  <Stat num="84" label="завершённых проекта" />
-                  <Stat num="7" label={`шагов до${NB}ключа`} />
-                </div>
-              </RevealItem>
-            </RevealStagger>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-panel">
-              <Photo src="/assets/projects/living-1.jpg" alt="Интерьер гостиной — проект Valentina" priority clip={false} />
-            </div>
+      <header className="pt-12">
+        <div className="mx-auto max-w-[1280px] px-8">
+          <div className="relative aspect-[21/9] overflow-hidden rounded-[6px] bg-panel">
+            <MotionPhoto src="/assets/projects/living-1.jpg" alt="Интерьер от Valentina Захряловой" sizes="100vw" priority />
           </div>
 
-          {/* MARQUEE */}
-          <div className="mt-20 overflow-hidden border-y border-line py-6">
-            <div className="vl-marquee flex gap-16 whitespace-nowrap font-serif text-[22px] italic text-ink-mute">
-              {[0, 1].map((i) => (
-                <span key={i} className="inline-flex items-center gap-16">
-                  {HERO_BAND.map((t, idx) => (
-                    <span key={idx} className="inline-flex items-center gap-16">
-                      {t}
-                      <i className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-                    </span>
-                  ))}
-                </span>
-              ))}
-            </div>
+          <div className="mt-9 grid items-end gap-12 md:grid-cols-[1fr_auto]">
+            <Reveal as="h1" className="h-display">
+              Создаю дома, в которых&nbsp;<em>хочется жить</em>,<br />а не просто находиться.
+            </Reveal>
+            <Reveal delay={0.15}>
+              <Magnetic strength={0.22}>
+                <a href="#cta" className="btn-primary btn-lg">Бесплатная консультация →</a>
+              </Magnetic>
+            </Reveal>
           </div>
         </div>
       </header>
 
-      {/* BLEED IMAGE */}
-      <section className="mt-20">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-[4px] bg-panel">
-            <Photo src="/assets/projects/living-5.jpg" alt="Гостиная в светлых тонах" sizes="100vw" />
-          </div>
-        </div>
-      </section>
-
       {/* WHY US */}
-      <section id="about" className="py-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="grid gap-20 md:grid-cols-2">
-            <Reveal>
-              <span className="eyebrow">— Почему{NB}нам доверяют</span>
-              <h2 className="h-section my-6">
-                Архитектурный фундамент, инженерная{NB}точность <em>и{NB}человеческое отношение.</em>
-              </h2>
+      <section id="about" className="py-[140px] max-md:py-20">
+        <div className="mx-auto max-w-[1280px] px-8">
+          <Reveal>
+            <div className="mb-16 grid items-end gap-16 md:grid-cols-2">
+              <div>
+                <span className="eyebrow">Почему мы</span>
+                <h2 className="h-section mt-4">
+                  Архитектурный подход <em>и&nbsp;инженерная точность</em>
+                </h2>
+              </div>
               <p className="lede">
-                Я{NB}не{NB}продаю «красивые картинки». Я{NB}проектирую дом как{NB}систему{NB}— геометрию, свет, маршруты, бюджет{NB}— и{NB}довожу её до{NB}состояния, в{NB}котором каждая деталь работает.
+                Я&nbsp;не&nbsp;продаю «красивые картинки». Проектирую дом как&nbsp;систему&nbsp;— геометрию, свет, маршруты, бюджет&nbsp;— и&nbsp;довожу её до&nbsp;состояния, в&nbsp;котором каждая деталь работает.
               </p>
-            </Reveal>
-            <RevealStagger className="flex flex-col gap-px overflow-hidden rounded-[6px] border border-line bg-line">
-              <RevealItem>
-                <WhyCard num={`— 01 ·${NB}Образование`} title={`Архитектурный${NB}фундамент и${NB}11 лет опыта`} text="Я — дизайнер с профильным архитектурным образованием. Создаю не просто красивые интерьеры, а эргономичные пространства, где продумана геометрия, свет и каждая деталь вашей будущей жизни." />
-              </RevealItem>
-              <RevealItem>
-                <WhyCard num={`— 02 ·${NB}Инженерия`} title={`Точность в${NB}каждом миллиметре`} text="Красивый дизайн-проект ничего не стоит без грамотной технической базы. Работаю в паре с инженером, который разрабатывает безупречные, детализированные чертежи. Для строителей — это понятная инструкция, для вас — гарантия, что всё будет реализовано точно по задумке." />
-              </RevealItem>
-              <RevealItem>
-                <WhyCard num={`— 03 ·${NB}Реализация`} title={`Без${NB}стресса: от${NB}закупки до${NB}стройки`} text="Вам не придётся искать подрядчиков и переплачивать. У меня есть проверенные годами строительные бригады и надёжные поставщики. А эксклюзивные партнёрские скидки на материалы и мебель помогут существенно оптимизировать ваш бюджет." />
-              </RevealItem>
+            </div>
+          </Reveal>
+
+          <div className="grid items-start gap-12 md:grid-cols-[1.35fr_.9fr] md:gap-20">
+            <RevealStagger className="grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-line bg-line">
+              {WHY.map((p) => (
+                <RevealItem key={p.n} className="flex min-h-[240px] flex-col gap-3.5 bg-bg p-8 px-7">
+                  <span className="font-serif text-[32px] font-normal italic leading-none text-accent">{p.n}</span>
+                  <h3 className="m-0 font-serif text-[22px] font-normal leading-[1.18] tracking-[-.005em]">{p.title}</h3>
+                  <p className="m-0 text-[14px] leading-[1.6] text-ink-dim">{p.text}</p>
+                </RevealItem>
+              ))}
             </RevealStagger>
+
+            <ClipReveal className="relative aspect-[3/4] overflow-hidden rounded-[8px] bg-panel">
+              <Image
+                src="/assets/designer-white.jpeg"
+                alt="Валентина Захрялова"
+                fill
+                sizes="(max-width: 980px) 100vw, 40vw"
+                className="object-cover"
+                style={{ objectPosition: "center 18%" }}
+              />
+              <div
+                className="absolute bottom-6 left-6 max-w-[240px] rounded-[6px] border px-5 py-4 backdrop-blur-md"
+                style={{
+                  background: "rgba(26,26,26,.78)",
+                  borderColor: "rgba(255,255,255,.08)",
+                }}
+              >
+                <div className="font-serif text-[22px] italic leading-[1.1]">Валентина Захрялова</div>
+                <div className="mt-2 text-[11px] uppercase tracking-[.18em] text-ink-mute">Дизайнер · архитектор</div>
+              </div>
+            </ClipReveal>
           </div>
         </div>
       </section>
 
-      {/* STEPS */}
-      <section id="process" className="pb-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="mb-14 grid items-end gap-20 md:grid-cols-2">
-            <Reveal>
-              <span className="eyebrow">— Процесс работы</span>
-              <h2 className="h-section mt-4">
-                7 шагов к{NB}идеальному <em>дому</em>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="lede">
-                Маршрут понятен с{NB}первой встречи и{NB}до{NB}момента, когда вы{NB}вешаете на{NB}стену последнюю картину. Никаких сюрпризов в{NB}смете и{NB}никаких «потом доделаем».
-              </p>
-            </Reveal>
-          </div>
+      {/* PROJECTS */}
+      <section id="projects" className="pb-[140px] max-md:pb-20">
+        <div className="mx-auto max-w-[1280px] px-8">
+          <Reveal>
+            <div className="mb-14 flex flex-wrap items-end justify-between gap-8">
+              <div>
+                <span className="eyebrow">Наши проекты</span>
+                <h2 className="h-section mt-4">
+                  Реализованные <em>интерьеры</em>
+                </h2>
+              </div>
+              <a href="#" className="btn-ghost">Все проекты →</a>
+            </div>
+          </Reveal>
 
-          <RevealStagger className="grid grid-cols-2 gap-px overflow-hidden rounded-[6px] border border-line bg-line md:grid-cols-7">
-            {STEPS.map((s) => (
-              <RevealItem
-                key={s.num}
-                className={`relative flex min-h-[240px] flex-col px-6 pt-8 pb-9 ${s.accent ? "border-l border-accent" : "bg-bg"}`}
-                style={s.accent ? { background: "#2a201a" } : undefined}
-              >
-                <div className="mb-auto pb-4 font-serif text-[13px] uppercase tracking-[.2em] text-ink-mute">
-                  <b className="mb-1.5 block text-[32px] font-normal italic tracking-normal text-accent normal-case">{s.num}</b>
-                  {s.word}
+          <RevealStagger className="grid grid-cols-1 gap-px overflow-hidden rounded-[8px] border border-line bg-line md:grid-cols-2">
+            {PROJECTS.map((p) => (
+              <RevealItem key={p.title} className="group flex flex-col bg-panel">
+                <div className="relative aspect-[4/3] overflow-hidden vl-tint">
+                  <Image
+                    src={p.src}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 980px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                  />
                 </div>
-                <h4 className="mb-2.5 font-serif text-[21px] font-normal leading-[1.15]">{s.title}</h4>
-                <p className="m-0 text-[13px] leading-[1.55] text-ink-dim">{s.text}</p>
+                <div className="flex items-end justify-between p-6 px-7">
+                  <div>
+                    <div className="font-serif text-[24px] font-normal leading-[1.1]">{p.title}</div>
+                    <div className="mt-1.5 text-[12px] tracking-[.06em] text-ink-mute">{p.sub}</div>
+                  </div>
+                  <span className="grid h-[42px] w-[42px] place-items-center rounded-full border border-line-2 text-[16px] text-ink-dim transition group-hover:rotate-[-45deg] group-hover:border-accent group-hover:bg-accent group-hover:text-[#1a1a1a]">
+                    →
+                  </span>
+                </div>
               </RevealItem>
             ))}
           </RevealStagger>
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section id="projects" className="pb-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <Reveal>
-              <span className="eyebrow">— Реализованные интерьеры</span>
-              <h2 className="h-section mt-4">
-                Избранные <em>проекты</em>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <a href="#" className="btn-ghost">Все проекты <span>→</span></a>
-            </Reveal>
-          </div>
-
-          <RevealStagger className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
-            <div className="flex flex-col gap-6">
-              <RevealItem>
-                <ProjCard src="/assets/projects/living-3.jpg" alt="Гостиная с фресковым панно" title="Тёплый минимализм" sub="ЖК «Нева» · Санкт-Петербург · 2024" ratio="aspect-[4/3]" />
-              </RevealItem>
-              <RevealItem>
-                <ProjCard src="/assets/projects/kitchen-3.jpg" alt="Кухня-столовая" title={`Студия у${NB}воды`} sub="Васильевский о-в · 2024" ratio="aspect-[16/9]" />
-              </RevealItem>
-            </div>
-            <div className="flex flex-col gap-6">
-              <RevealItem>
-                <ProjCard src="/assets/projects/living-7.jpg" alt="Гостиная в загородном доме" title={`Дом в${NB}сосновом бору`} sub="Ленобласть · 2023" ratio="aspect-[3/4]" />
-              </RevealItem>
-              <RevealItem>
-                <ProjCard src="/assets/projects/kitchen-7.jpg" alt="Кухня — свет и камень" title={`Свет и${NB}камень`} sub="Центр · 2024" ratio="aspect-[4/3]" />
-              </RevealItem>
-            </div>
-          </RevealStagger>
-        </div>
-      </section>
-
       {/* SERVICES */}
-      <section id="services" className="pb-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="mb-14 grid items-end gap-20 md:grid-cols-2">
-            <Reveal>
-              <span className="eyebrow">— Услуги и{NB}цены</span>
-              <h2 className="h-section mt-4">
-                Выбирайте{NB}то, что{NB}нужно <em>именно вам</em>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="lede">
-                Я{NB}не{NB}навязываю «полный пакет», если он{NB}вам не{NB}нужен. Три формата сотрудничества{NB}— от{NB}планировочного решения до{NB}проекта под{NB}ключ.
-              </p>
-            </Reveal>
-          </div>
-
-          <RevealStagger className="grid gap-6 md:grid-cols-3">
-            <RevealItem>
-              <ServiceCard
-                tag="— Базовый"
-                title="Планировочное решение"
-                sub="Когда нужна точная планировка"
-                items={[
-                  `Замер и${NB}фотофиксация объекта`,
-                  "2–3 варианта планировки",
-                  `Расстановка мебели и${NB}освещения`,
-                  `План демонтажа и${NB}монтажа перегородок`,
-                  `3D-обзор с${NB}комментариями`,
-                ]}
-                priceFrom="3 000"
-                priceUnit={`${NB}₽/м²`}
-                cta="ghost"
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                tag="— Популярный"
-                title="Полный дизайн-проект"
-                sub={`Готовая документация и${NB}3D`}
-                feat
-                items={[
-                  `Всё из${NB}«Планировочного решения»`,
-                  `Концепция и${NB}стилевое решение`,
-                  "Фотореалистичная 3D-визуализация",
-                  "Полный пакет рабочих чертежей",
-                  "Спецификации мебели, света, отделки",
-                  `Подбор поставщиков и${NB}скидки до${NB}30%`,
-                ]}
-                priceFrom="4 000"
-                priceUnit={`${NB}₽/м²`}
-                cta="primary"
-              />
-            </RevealItem>
-            <RevealItem>
-              <ServiceCard
-                tag="— Под ключ"
-                title={`Авторский надзор и${NB}реализация`}
-                sub={`Мы${NB}ведём проект до${NB}ключа`}
-                items={[
-                  "Проверенная строительная бригада",
-                  `Закупка материалов и${NB}логистика`,
-                  `Контроль качества на${NB}всех этапах`,
-                  `Авторский надзор раз в${NB}неделю`,
-                  `Финальный клининг и${NB}стилизация`,
-                  `Гарантия на${NB}работы 24${NB}месяца`,
-                ]}
-                priceFrom="45 000"
-                priceUnit={`${NB}₽/мес`}
-                cta="ghost"
-              />
-            </RevealItem>
-          </RevealStagger>
-        </div>
-      </section>
-
-      {/* DESIGNER */}
-      <section className="border-y border-line bg-bg-2 py-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="grid items-center gap-16 md:grid-cols-[1fr_1.1fr]">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-panel">
-              <ClipReveal className="absolute inset-0">
-                <Image
-                  src="/assets/designer-blue.jpg"
-                  alt="Валентина Захрялова — основательница студии"
-                  fill
-                  sizes="(max-width: 980px) 100vw, 50vw"
-                  className="object-cover"
-                  style={{ filter: "contrast(1.02) saturate(.95)" }}
-                />
-              </ClipReveal>
-            </div>
-            <RevealStagger>
-              <RevealItem>
-                <span className="eyebrow">— Основательница студии</span>
-                <h2 className="h-section my-6">
-                  Валентина <em>Захрялова</em>
+      <section id="services" className="pb-[140px] max-md:pb-20">
+        <div className="mx-auto max-w-[1280px] px-8">
+          <Reveal>
+            <div className="mb-16 grid items-end gap-12 md:grid-cols-[1.1fr_1fr] md:gap-20">
+              <div>
+                <span className="eyebrow">Услуги</span>
+                <h2 className="h-section mt-4">
+                  Давайте подберём услугу <em>под ваш запрос</em>
                 </h2>
-              </RevealItem>
-              <RevealItem>
-                <p className="m-0 mb-7 font-serif text-[24px] font-light italic leading-[1.45] text-ink">
-                  «Я{NB}не{NB}верю в{NB}интерьеры «на{NB}один сезон». Дом должен взрослеть вместе с{NB}вами{NB}— и{NB}каждый раз, возвращаясь, вы{NB}должны выдыхать. Это и{NB}есть результат, за{NB}который я{NB}берусь.»
-                </p>
-              </RevealItem>
-              <RevealItem>
-                <p className="text-[14px] leading-[1.6] text-ink-dim">
-                  Архитектор по{NB}образованию (СПбГАСУ, 2014). 11 лет частной практики, более 80{NB}завершённых проектов в{NB}Санкт-Петербурге, Москве, Сочи и{NB}Тюмени. Преподаю основы композиции на{NB}курсах для{NB}начинающих дизайнеров.
-                </p>
-              </RevealItem>
-              <RevealItem>
-                <div className="mt-8 flex items-center gap-5 border-t border-line pt-6">
-                  <svg width="86" height="44" viewBox="0 0 86 44" fill="none" stroke="#c8956d" strokeWidth="1.4" strokeLinecap="round">
-                    <path d="M4 28 C 10 12, 18 8, 22 22 C 24 32, 30 36, 36 26 C 40 18, 46 14, 50 24 C 54 32, 62 32, 68 22 C 72 14, 78 16, 82 22" />
-                  </svg>
+              </div>
+              <p className="lede">
+                Шесть форматов сотрудничества&nbsp;— от&nbsp;планировочного решения за&nbsp;неделю до&nbsp;полного авторского надзора. Без&nbsp;«полного пакета», если он&nbsp;вам не&nbsp;нужен.
+              </p>
+            </div>
+          </Reveal>
+
+          <RevealStagger className="grid grid-cols-1 gap-px overflow-hidden rounded-[8px] border border-line bg-line md:grid-cols-3">
+            {SERVICES.map((s) => (
+              <RevealItem
+                key={s.n}
+                className="group relative flex min-h-[340px] flex-col bg-bg p-9 px-8 pb-8 transition-colors hover:bg-bg-2"
+              >
+                <span className="font-serif text-[18px] font-normal italic text-accent">{s.n}</span>
+                <h3 className="m-0 mb-2.5 mt-4 font-serif text-[30px] font-normal leading-[1.12] tracking-[-.005em]">
+                  {s.title}
+                </h3>
+                <p className="m-0 mb-auto text-[14px] leading-[1.6] text-ink-dim">{s.desc}</p>
+                <div className="mt-8 flex items-end justify-between border-t border-line-2 pt-6">
                   <div>
-                    <div className="font-serif text-[22px] italic">Валентина З.</div>
-                    <div className="mt-1 text-[11px] uppercase tracking-[.18em] text-ink-mute">Основатель · главный{NB}дизайнер</div>
+                    <div className="mb-1 text-[11px] uppercase tracking-[.16em] text-ink-mute">от</div>
+                    <div className="font-serif text-[32px] font-normal leading-none text-ink">
+                      {s.price} <em className="text-[18px] italic text-accent">{s.unit}</em>
+                    </div>
                   </div>
+                  <a
+                    href="#cta"
+                    aria-label="Заказать услугу"
+                    className="grid h-[42px] w-[42px] place-items-center rounded-full border border-line-2 text-[14px] text-ink-mute transition group-hover:border-accent group-hover:text-accent"
+                  >
+                    →
+                  </a>
                 </div>
               </RevealItem>
-            </RevealStagger>
+            ))}
+          </RevealStagger>
+        </div>
+      </section>
+
+      {/* BIG CTA */}
+      <Reveal>
+        <section className="mx-auto my-[60px] max-w-[1280px] px-8">
+          <div
+            className="relative grid items-center gap-12 overflow-hidden rounded-[120px] border border-line-2 px-20 py-14 max-md:rounded-[32px] max-md:p-7 md:grid-cols-[1fr_auto]"
+            style={{ background: "linear-gradient(135deg,#272320 0%,#1f1c19 100%)" }}
+          >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -left-20 top-1/2 h-60 w-60 -translate-y-1/2 rounded-full"
+              style={{ background: "radial-gradient(circle, rgba(217,205,184,.12), transparent 70%)" }}
+            />
+            <div className="relative">
+              <h2 className="m-0 font-serif text-[48px] font-light leading-[1.05] tracking-[-.015em] max-md:text-[34px]">
+                Записаться на&nbsp;<em>бесплатную консультацию</em>
+              </h2>
+              <div className="mt-3.5 max-w-[48ch] text-[14px] text-ink-dim">
+                Покажите планировку или&nbsp;опишите задачу&nbsp;— я&nbsp;перезвоню в&nbsp;течение 30&nbsp;минут, обсудим проект и&nbsp;пришлю коммерческое предложение в&nbsp;тот&nbsp;же день.
+              </div>
+            </div>
+            <div className="relative flex flex-col items-end gap-3.5 max-md:items-start">
+              <Magnetic strength={0.22}>
+                <a href="#cta" className="btn-primary btn-lg">Записаться →</a>
+              </Magnetic>
+              <a href="tel:+79829610131" className="btn-ghost">+7 982 961 01 31</a>
+            </div>
           </div>
+        </section>
+      </Reveal>
+
+      {/* STEPS */}
+      <section id="process" className="pb-[140px] max-md:pb-20">
+        <div className="mx-auto max-w-[1280px] px-8">
+          <Reveal>
+            <div className="mb-16">
+              <span className="eyebrow">Этапы работы</span>
+              <h2 className="h-section mt-4">
+                От&nbsp;первого замера <em>до&nbsp;последнего штриха</em>
+              </h2>
+            </div>
+          </Reveal>
+
+          <RevealStagger className="grid grid-cols-1 gap-px overflow-hidden rounded-[8px] border border-line bg-line md:grid-cols-2">
+            {STEPS.map((s) => (
+              <RevealItem
+                key={s.n}
+                className="grid grid-cols-[64px_1fr] items-start gap-6 bg-bg p-9 px-9"
+              >
+                <span className="font-serif text-[42px] font-normal italic leading-none text-accent">{s.n}</span>
+                <div>
+                  <h4 className="m-0 mb-2 font-serif text-[24px] font-normal leading-[1.15] tracking-[-.005em]">{s.title}</h4>
+                  <p className="m-0 text-[14px] leading-[1.65] text-ink-dim">{s.text}</p>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealStagger>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <Reveal>
-              <span className="eyebrow">— Отзывы клиентов</span>
-              <h2 className="h-section mt-4">
-                Что{NB}о{NB}нас говорят <em>заказчики</em>
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="flex gap-2.5">
-                <button className="btn-ghost px-4">←</button>
-                <button className="btn-ghost px-4">→</button>
-              </div>
-            </Reveal>
-          </div>
-
-          <RevealStagger className="grid gap-6 md:grid-cols-[1.2fr_1fr]">
-            <RevealItem className="grid grid-rows-[1fr_auto] overflow-hidden rounded-[6px] border border-line bg-panel">
-              <div className="relative aspect-[5/4] overflow-hidden">
-                <Photo src="/assets/projects/living-9.jpg" alt="Квартира Соколовых" />
-              </div>
-              <div className="p-8">
-                <div className="vl-quote font-serif text-[21px] font-normal leading-[1.4]">
-                  Когда мы{NB}пришли, у{NB}нас была голая квартира и{NB}куча сомнений. Валентина не{NB}просто нарисовала красивую картинку{NB}— она продумала как{NB}мы{NB}живём, где сидим утром с{NB}кофе, где работает муж. Получилось не{NB}«дизайнерское жильё», а{NB}именно наш{NB}дом.
-                </div>
-                <Who name={`Анна и${NB}Михаил Соколовы`} position={`Заказчики · 116${NB}м² · 2024`} />
-              </div>
-            </RevealItem>
-
-            <RevealItem className="flex flex-col gap-6 rounded-[6px] border border-line bg-panel p-10">
-              <div className="vl-quote font-serif text-[21px] font-normal leading-[1.4]">
-                Мы{NB}до{NB}этого работали с{NB}двумя студиями{NB}— и{NB}каждый раз получали либо красиво, либо удобно. С{NB}Валентиной впервые сошлось всё. Особенно ценно, что в{NB}смете не{NB}было ни{NB}одного «вдруг» — Валентина закладывает ресурсы заранее.
-              </div>
-              <Who name="Ирина Дёмина" position={`Загородный дом · 220${NB}м²`} mtAuto />
-            </RevealItem>
-          </RevealStagger>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="pb-[120px]">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="grid items-start gap-20 md:grid-cols-[1fr_1.4fr]">
-            <Reveal>
-              <span className="eyebrow">— FAQ</span>
-              <h2 className="h-section mt-4">
-                Ответы на{NB}частые <em>вопросы</em>
-              </h2>
-              <p className="mt-6 max-w-[34ch] text-[14px] leading-[1.6] text-ink-dim">
-                Не{NB}нашли свой вопрос{NB}— напишите его в{NB}форме ниже, ответим в{NB}течение дня.
-              </p>
-            </Reveal>
-            <RevealStagger className="border-t border-line">
-              {FAQS.map((f, i) => (
-                <RevealItem key={i}>
-                  <details className="vl-faq border-b border-line py-6" open={f.open}>
-                    <summary className="flex cursor-pointer items-center justify-between gap-6 font-serif text-[22px] font-normal text-ink">
-                      <span>{f.q}</span>
-                      <span className="vl-faq-ic grid h-9 w-9 flex-shrink-0 place-items-center rounded-full border border-line text-ink-dim transition">+</span>
-                    </summary>
-                    <div className="max-w-[62ch] py-4 text-[14px] leading-[1.7] text-ink-dim">{f.a}</div>
-                  </details>
-                </RevealItem>
-              ))}
-            </RevealStagger>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section id="cta" className="border-y border-line bg-bg-2 py-24">
-        <div className="mx-auto grid max-w-[1240px] items-center gap-12 px-8 md:grid-cols-2">
+      <section id="reviews" className="pb-[140px] max-md:pb-20">
+        <div className="mx-auto max-w-[1280px] px-8">
           <Reveal>
-            <span className="eyebrow">— Свяжитесь с{NB}нами</span>
-            <h2 className="h-section mt-4">
-              Давайте создадим интерьер <em>вашей мечты</em>
-            </h2>
-            <p className="lede mt-5">
-              Оставьте заявку{NB}— я{NB}перезвоню в{NB}течение 30{NB}минут, обсудим проект и{NB}пришлю коммерческое предложение в{NB}этот{NB}же день.
-            </p>
-            <div className="mt-8 flex flex-col gap-3.5 text-[14px] text-ink-dim">
-              <ContactRow icon="phone" text="+7 982 961 01 31" />
-              <ContactRow icon="mail" text="hello@valentina-studio.ru" />
-              <ContactRow icon="pin" text={`Санкт-Петербург, ул.${NB}Большая${NB}Морская, 12`} />
+            <div className="mb-14">
+              <span className="eyebrow">Отзывы</span>
+              <h2 className="h-section mt-4">
+                Что&nbsp;говорят <em>о&nbsp;работе</em>
+              </h2>
             </div>
           </Reveal>
-          <Reveal delay={0.15}>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[8px] bg-panel">
+              <MotionPhoto src="/assets/projects/living-9.jpg" alt="Реализованный проект" sizes="(max-width:980px) 100vw, 50vw" />
+            </div>
+            <Reveal delay={0.1}>
+              <div className="flex h-full flex-col rounded-[8px] border border-line bg-panel p-12 max-md:p-8">
+                <div className="mb-2 font-serif text-[96px] italic leading-[.6] text-accent">“</div>
+                <div className="font-serif text-[24px] font-normal leading-[1.4] text-ink">
+                  Когда&nbsp;мы пришли, у&nbsp;нас была голая квартира и&nbsp;куча сомнений. Валентина не&nbsp;просто нарисовала красивую картинку&nbsp;— она&nbsp;продумала, как&nbsp;мы будем жить здесь утром, вечером и&nbsp;в&nbsp;дождь. Через&nbsp;год мы&nbsp;до&nbsp;сих пор находим продуманные мелочи.
+                </div>
+                <div className="mt-8 flex items-center gap-3.5 border-t border-line pt-6">
+                  <div className="grid h-12 w-12 place-items-center rounded-full font-serif text-[20px] italic text-accent" style={{ background: "linear-gradient(135deg,#3a3a36,#2a2a26)" }}>С</div>
+                  <div>
+                    <div className="text-[14px] font-medium text-ink">Семья Соколовых</div>
+                    <div className="mt-0.5 text-[11px] uppercase tracking-[.1em] text-ink-mute">Квартира 87&nbsp;м² · ЖК «Нева» · СПб</div>
+                  </div>
+                </div>
+                <div className="mt-8 flex justify-end gap-2.5">
+                  <button aria-label="Предыдущий" className="grid h-12 w-12 place-items-center rounded-full border border-line-2 text-ink-dim transition hover:border-accent hover:text-accent">←</button>
+                  <button aria-label="Следующий" className="grid h-12 w-12 place-items-center rounded-full border border-line-2 text-ink-dim transition hover:border-accent hover:text-accent">→</button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* QBLOCK + FORM */}
+      <section id="cta" className="border-y border-line bg-bg-2 py-[120px] max-md:py-20">
+        <div className="mx-auto grid max-w-[1280px] items-center gap-20 px-8 md:grid-cols-[1.1fr_1fr]">
+          <Reveal>
+            <div>
+              <span className="eyebrow">Есть вопросы?</span>
+              <h2 className="h-section mt-4">
+                Напишите мне&nbsp;— <em>отвечу лично</em>
+              </h2>
+              <p className="lede mt-6">
+                Расскажите о&nbsp;квартире, доме или&nbsp;коммерческом помещении. Любая стадия: голые стены, готовый ремонт, мысли о&nbsp;переезде. Перезвоню в&nbsp;течение 30&nbsp;минут.
+              </p>
+
+              <RevealStagger className="mt-10 grid gap-5">
+                {QFEATS.map((f) => (
+                  <RevealItem key={f.title} className="grid grid-cols-[36px_1fr] items-start gap-4">
+                    <span className="grid h-9 w-9 place-items-center rounded-full border border-accent text-accent">
+                      {f.icon}
+                    </span>
+                    <div>
+                      <div className="mb-1 font-serif text-[20px] leading-[1.2]">{f.title}</div>
+                      <div className="text-[13.5px] leading-[1.55] text-ink-dim">{f.desc}</div>
+                    </div>
+                  </RevealItem>
+                ))}
+              </RevealStagger>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
             <ContactForm />
           </Reveal>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer id="contacts" className="bg-bg pb-10 pt-16">
-        <div className="mx-auto max-w-[1240px] px-8">
-          <div className="mb-12 grid gap-12 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
+      <footer id="contacts" className="border-t border-line bg-bg pb-9 pt-20 max-md:pt-16">
+        <div className="mx-auto max-w-[1280px] px-8">
+          <div className="mb-16 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <div>
-              <a href="#" className="mb-4 inline-block">
+              <a href="#" className="inline-block">
                 <Image
                   src="/assets/logo-valentina.png"
-                  alt="Valentina Interior Design"
-                  width={128}
-                  height={64}
-                  className="h-16 w-auto"
+                  alt="Valentina"
+                  width={160}
+                  height={80}
+                  className="h-20 w-auto"
                   style={{ filter: "brightness(0) invert(1)" }}
                 />
               </a>
-              <p className="mt-4 max-w-[34ch] text-[14px] leading-[1.6] text-ink-dim">
-                Авторская студия интерьера Валентины Захряловой. Архитектурный подход, инженерная точность, авторский надзор от{NB}первого замера до{NB}готового дома.
+              <p className="mt-6 max-w-[36ch] font-serif text-[20px] italic leading-[1.5] text-ink-dim">
+                «Дом должен взрослеть вместе с&nbsp;вами&nbsp;— не&nbsp;становиться музеем».
               </p>
             </div>
-            <FootCol
-              title="Навигация"
-              items={[
-                ["Проекты", "#projects"],
-                ["Услуги", "#services"],
-                ["Процесс", "#process"],
-                [`О${NB}студии`, "#about"],
-              ]}
-            />
-            <FootCol
-              title="Контакты"
-              items={[
-                ["+7 982 961 01 31"],
-                ["hello@valentina-studio.ru"],
-                [`СПб · Большая${NB}Морская, 12`],
-              ]}
-            />
-            <FootCol
-              title="Социальные сети"
-              items={[
-                ["Instagram", "#"],
-                ["Pinterest", "#"],
-                ["Telegram", "#"],
-                ["Behance", "#"],
-              ]}
-            />
+            <div>
+              <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Связаться</h5>
+              <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
+                <li><a href="tel:+79829610131" className="hover:text-accent">+7 982 961 01 31</a></li>
+                <li><a href="mailto:hello@valentina-design.ru" className="hover:text-accent">hello@valentina-design.ru</a></li>
+                <li>СПб · Большая Морская, 12</li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Навигация</h5>
+              <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
+                <li><a href="#about" className="hover:text-accent">Почему мы</a></li>
+                <li><a href="#projects" className="hover:text-accent">Проекты</a></li>
+                <li><a href="#services" className="hover:text-accent">Услуги</a></li>
+                <li><a href="#process" className="hover:text-accent">Этапы работы</a></li>
+                <li><a href="#reviews" className="hover:text-accent">Отзывы</a></li>
+              </ul>
+            </div>
+            <div>
+              <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Соцсети</h5>
+              <div className="flex gap-2">
+                <SocialLink label="Instagram">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
+                </SocialLink>
+                <SocialLink label="Telegram">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"><path d="M21 4 2 11l6 2 2 6 4-4 5 4 2-15z" /></svg>
+                </SocialLink>
+                <SocialLink label="WhatsApp">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3.5-7.1L21 4l-1.1 3.5A9 9 0 0 1 21 12z" /><path d="M8 11c0 3 2 5 5 5l2-2-2-1-1 1c-1 0-2-1-2-2l1-1-1-2-2 2z" /></svg>
+                </SocialLink>
+                <SocialLink label="Pinterest">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><circle cx="12" cy="12" r="10" /><path d="M12 7v10M9 17l3-10 3 5" /></svg>
+                </SocialLink>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-7 text-[12px] text-ink-mute">
-            <span>© 2026 Valentina Interior Design. Все{NB}права{NB}защищены.</span>
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8 text-[12px] text-ink-mute">
+            <span>© 2026 Valentina Захрялова · Студия дизайна интерьера</span>
             <span>
-              <a href="#" className="hover:text-accent">Политика конфиденциальности</a> · <a href="#" className="hover:text-accent">Договор-оферта</a>
+              <a href="#" className="hover:text-ink-dim">Политика конфиденциальности</a> · <a href="#" className="hover:text-ink-dim">Договор-оферта</a>
             </span>
           </div>
         </div>
@@ -546,136 +485,28 @@ export default function Page() {
   );
 }
 
-/* ───── helpers ───── */
-
-function Stat({ num, label }: { num: string; label: string }) {
+function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <div>
-      <div className="font-serif text-[38px] font-light leading-none text-accent">{num}</div>
-      <div className="mt-2 text-[11px] uppercase tracking-[.18em] text-ink-mute">{label}</div>
-    </div>
+    <li>
+      <a
+        href={href}
+        className="inline-block rounded-full px-4 py-2.5 tracking-[.04em] transition hover:bg-white/[.04] hover:text-ink"
+        style={{ fontWeight: 400 }}
+      >
+        {children}
+      </a>
+    </li>
   );
 }
 
-function WhyCard({ num, title, text }: { num: string; title: string; text: string }) {
+function SocialLink({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="bg-bg p-9 px-8">
-      <span className="mb-3.5 block font-serif text-[18px] italic text-accent">{num}</span>
-      <h3 className="m-0 mb-3 font-serif text-[24px] font-normal leading-[1.2] tracking-[-.005em]">{title}</h3>
-      <p className="m-0 text-[14px] leading-[1.65] text-ink-dim">{text}</p>
-    </div>
-  );
-}
-
-function ProjCard({
-  src, alt, title, sub, ratio,
-}: { src: string; alt: string; title: string; sub: string; ratio: string }) {
-  return (
-    <div className="group cursor-pointer overflow-hidden rounded-[4px] bg-panel transition-transform duration-300 hover:-translate-y-1">
-      <div className={`relative overflow-hidden ${ratio}`}>
-        <Photo src={src} alt={alt} />
-      </div>
-      <div className="flex items-end justify-between p-6">
-        <div>
-          <div className="font-serif text-[22px] font-normal">{title}</div>
-          <div className="mt-1 text-[12px] tracking-[.06em] text-ink-mute">{sub}</div>
-        </div>
-        <span className="grid h-[38px] w-[38px] place-items-center rounded-full border border-line text-ink-dim transition group-hover:border-accent group-hover:bg-accent group-hover:text-[#1c1916]">↗</span>
-      </div>
-    </div>
-  );
-}
-
-function ServiceCard({
-  tag, title, sub, items, priceFrom, priceUnit, cta, feat,
-}: {
-  tag: string;
-  title: string;
-  sub: string;
-  items: string[];
-  priceFrom: string;
-  priceUnit: string;
-  cta: "primary" | "ghost";
-  feat?: boolean;
-}) {
-  const bgStyle = feat ? { background: "linear-gradient(180deg,#2c241d,#241e1a)" } : undefined;
-  return (
-    <div
-      className="flex min-h-[480px] flex-col rounded-[6px] border border-line bg-panel p-9 px-8 transition-colors hover:border-accent"
-      style={bgStyle}
+    <a
+      href="#"
+      aria-label={label}
+      className="grid h-[38px] w-[38px] place-items-center rounded-full border border-line-2 text-ink-dim transition hover:border-accent hover:text-accent"
     >
-      <span className="mb-4 text-[10px] uppercase tracking-[.22em] text-accent">{tag}</span>
-      <h3 className="m-0 mb-2 font-serif text-[28px] font-normal leading-[1.15]">{title}</h3>
-      <div className="mb-6 text-[13px] text-ink-mute">{sub}</div>
-      <ul className="vl-bullets m-0 mb-7 flex list-none flex-col gap-2.5 p-0 text-[13.5px] text-ink-dim">
-        {items.map((it) => <li key={it}>{it}</li>)}
-      </ul>
-      <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-5">
-        <div>
-          <div className="text-[11px] uppercase tracking-[.08em] text-ink-mute">от</div>
-          <div className="font-serif text-[30px] font-normal text-ink">
-            {priceFrom}<em className="italic text-accent">{priceUnit}</em>
-          </div>
-        </div>
-        <a href="#cta" className={cta === "primary" ? "btn-primary" : "btn-ghost"}>Заказать</a>
-      </div>
-    </div>
-  );
-}
-
-function Who({ name, position, mtAuto }: { name: string; position: string; mtAuto?: boolean }) {
-  return (
-    <div className={`flex items-center gap-3.5 ${mtAuto ? "mt-auto" : "mt-6"}`}>
-      <div
-        className="h-[46px] w-[46px] rounded-full"
-        style={{ background: "linear-gradient(135deg,#3a342f,#2a2622)" }}
-      />
-      <div>
-        <div className="text-[14px]">{name}</div>
-        <div className="mt-0.5 text-[11px] tracking-[.08em] text-ink-mute">{position}</div>
-      </div>
-    </div>
-  );
-}
-
-function ContactRow({ icon, text }: { icon: "phone" | "mail" | "pin"; text: string }) {
-  return (
-    <div className="flex items-center gap-3.5">
-      <span className="inline-grid h-[34px] w-[34px] flex-shrink-0 place-items-center rounded-full border border-line text-accent">
-        {icon === "phone" && (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-          </svg>
-        )}
-        {icon === "mail" && (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-            <polyline points="22,6 12,13 2,6" />
-          </svg>
-        )}
-        {icon === "pin" && (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
-        )}
-      </span>
-      <span>{text}</span>
-    </div>
-  );
-}
-
-function FootCol({ title, items }: { title: string; items: string[][] }) {
-  return (
-    <div>
-      <h5 className="m-0 mb-4 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">{title}</h5>
-      <ul className="m-0 flex list-none flex-col gap-2.5 p-0 text-[13.5px] text-ink-dim">
-        {items.map((it, i) => (
-          <li key={i}>
-            {it.length === 2 ? <a href={it[1]} className="hover:text-accent">{it[0]}</a> : it[0]}
-          </li>
-        ))}
-      </ul>
-    </div>
+      {children}
+    </a>
   );
 }
