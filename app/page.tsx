@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ContactForm } from "./contact-form";
+import { HeroSlideshow } from "./hero-slideshow";
 import { ClipReveal, Magnetic, MotionPhoto, Reveal, RevealItem, RevealStagger } from "./lib/motion";
 
 const NB = " ";
@@ -8,7 +9,7 @@ const WHY = [
   {
     n: "01",
     title: "Архитектурное образование",
-    text: `Я${NB}— дизайнер с${NB}профильным архитектурным образованием и${NB}11${NB}годами практики. Создаю не${NB}просто красивые интерьеры, а${NB}эргономичные пространства.`,
+    text: `Профильное архитектурное образование. 11${NB}лет практики в${NB}интерьере. Создаю не${NB}просто красивые интерьеры, а${NB}эргономичные пространства, где продумана геометрия, свет и${NB}каждая деталь.`,
   },
   {
     n: "02",
@@ -22,8 +23,8 @@ const WHY = [
   },
   {
     n: "04",
-    title: "Скидки до 30%",
-    text: `Эксклюзивные партнёрские скидки на${NB}материалы и${NB}мебель помогут существенно оптимизировать ваш бюджет${NB}— до${NB}30${NB}% от${NB}розничных цен.`,
+    title: "Скидки до 20%",
+    text: `Эксклюзивные партнёрские скидки на${NB}материалы и${NB}мебель помогут оптимизировать ваш бюджет${NB}— до${NB}20${NB}% от${NB}розничных цен.`,
   },
 ];
 
@@ -36,7 +37,7 @@ const PROJECTS = [
 
 const SERVICES = [
   { n: "01", title: "Планировочное решение", desc: `Точная планировка, расстановка мебели и${NB}освещения, демонтаж и${NB}монтаж перегородок.`, price: "1 000", unit: "₽/м²" },
-  { n: "02", title: `Смарт-проект с${NB}ПИ`, desc: "Планировка плюс полный пакет инженерных решений: электрика, сантехника, освещение.", price: "2 500", unit: "₽/м²" },
+  { n: "02", title: `Смарт-проект с${NB}ПИ`, desc: "Информация в работе — пришлю описание в ближайшее время.", price: "2 500", unit: "₽/м²", pending: true },
   { n: "03", title: `Эскизный проект с${NB}визуализацией`, desc: `Стилевая концепция и${NB}фотореалистичные 3D-визуализации каждой комнаты${NB}— до${NB}последней лампы.`, price: "3 000", unit: "₽/м²" },
   { n: "04", title: `Эскизный проект с${NB}чертежами`, desc: `Концепция и${NB}полный пакет рабочих чертежей для${NB}строительной бригады со${NB}спецификациями.`, price: "3 000", unit: "₽/м²" },
   { n: "05", title: `Проект под${NB}ключ`, desc: `Концепция, визуализация, рабочие чертежи и${NB}спецификации${NB}— всё в${NB}одном пакете «всё включено».`, price: "4 000", unit: "₽/м²" },
@@ -48,7 +49,7 @@ const STEPS = [
   { n: "02", title: `Планировка и${NB}концепция`, text: `2–3 варианта планировок, зонирование, расстановка мебели и${NB}стилевое решение. Согласовываем направление, прежде${NB}чем идти в${NB}3D.` },
   { n: "03", title: `Визуализация в${NB}3D`, text: `Фотореалистичные ракурсы каждой комнаты${NB}— с${NB}реальной мебелью, светом и${NB}материалами. Можно «прожить» интерьер до${NB}старта ремонта.` },
   { n: "04", title: "Рабочие чертежи", text: `Полный пакет технической документации: планы, развёртки, узлы, схемы электрики и${NB}сантехники. По${NB}нему бригада строит без${NB}вопросов.` },
-  { n: "05", title: `Закупка и${NB}логистика`, text: `Подбор поставщиков, оформление заказов с${NB}партнёрскими скидками до${NB}30%, отслеживание сроков и${NB}доставка на${NB}объект.` },
+  { n: "05", title: "Выдача альбома", text: `Готовый дизайн-проект${NB}— в${NB}печатном и${NB}электронном виде. Полный пакет, по${NB}которому можно работать с${NB}любой бригадой.` },
   { n: "06", title: "Авторский надзор", text: `Регулярные выезды на${NB}объект, контроль точности воплощения, оперативные правки. Я${NB}остаюсь рядом до${NB}последнего штриха.` },
 ];
 
@@ -85,51 +86,34 @@ const QFEATS = [
 export default function Page() {
   return (
     <>
-      {/* NAV */}
+      {/* NAV — no logo, stretched pills, accent phone button */}
       <nav
         className="sticky top-0 z-50 border-b border-line backdrop-blur-md"
         style={{ background: "rgba(26,26,26,.82)" }}
       >
-        <div className="mx-auto flex h-24 max-w-[1280px] items-center justify-between gap-12 px-8">
-          <a href="#" className="flex items-center">
-            <Image
-              src="/assets/logo-valentina.png"
-              alt="Valentina Захрялова"
-              width={148}
-              height={74}
-              className="h-[74px] w-auto"
-              style={{ filter: "brightness(0) invert(1)" }}
-              priority
-            />
-          </a>
-          <ul className="hidden list-none items-center gap-2 p-0 text-[13px] text-ink-dim md:flex">
-            <NavLink href="#about">Мы</NavLink>
-            <NavLink href="#projects">Проекты</NavLink>
-            <NavLink href="#services">Услуги</NavLink>
-            <li>
-              <a
-                href="#contacts"
-                className="inline-block rounded-full bg-grey px-4 py-2.5 tracking-[.04em] text-ink transition hover:bg-accent hover:text-[#1a1a1a]"
-                style={{ fontWeight: 400 }}
-              >
-                Контакты
-              </a>
-            </li>
+        <div className="mx-auto flex h-24 max-w-[1280px] items-center gap-4 px-8 max-md:gap-3">
+          <ul className="flex flex-1 list-none items-center gap-1.5 p-1 m-0 rounded-full border border-line-2 text-[13px] text-ink-dim max-md:hidden">
+            <NavPill href="#about">Мы</NavPill>
+            <NavPill href="#projects">Проекты</NavPill>
+            <NavPill href="#services">Услуги</NavPill>
+            <NavPill href="#cta" active>Контакты</NavPill>
           </ul>
-          <a href="tel:+79829610131" className="text-[14px] font-normal tracking-[.04em] text-ink whitespace-nowrap">
-            +7&nbsp;982&nbsp;961&nbsp;01&nbsp;31
-          </a>
+          <Magnetic strength={0.18}>
+            <a href="tel:+79829610131" className="btn-primary">
+              +7 982 961 01 31
+            </a>
+          </Magnetic>
         </div>
       </nav>
 
-      {/* HERO */}
-      <header className="pt-12">
-        <div className="mx-auto max-w-[1280px] px-8">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-[6px] bg-panel">
-            <MotionPhoto src="/assets/projects/living-1.jpg" alt="Интерьер от Valentina Захряловой" sizes="100vw" priority />
-          </div>
+      {/* HERO — full-bleed slideshow with darkening overlay */}
+      <header>
+        <div className="relative w-full overflow-hidden bg-panel" style={{ height: "min(85vh, 820px)" }}>
+          <HeroSlideshow />
+        </div>
 
-          <div className="mt-9 grid items-end gap-12 md:grid-cols-[1fr_auto]">
+        <div className="mx-auto max-w-[1280px] px-8 pt-12">
+          <div className="grid items-end gap-12 md:grid-cols-[1fr_auto]">
             <Reveal as="h1" className="h-display">
               Создаю дома, в которых&nbsp;<em>хочется жить</em>,<br />а не просто находиться.
             </Reveal>
@@ -142,14 +126,14 @@ export default function Page() {
         </div>
       </header>
 
-      {/* WHY US */}
+      {/* WHY US — eyebrow brighter, 4 cards aligned to designer photo height */}
       <section id="about" className="py-[140px] max-md:py-20">
         <div className="mx-auto max-w-[1280px] px-8">
           <Reveal>
             <div className="mb-16 grid items-end gap-16 md:grid-cols-2">
               <div>
                 <span className="eyebrow">Почему мы</span>
-                <h2 className="h-section mt-4">
+                <h2 className="h-section mt-5">
                   Архитектурный подход <em>и&nbsp;инженерная точность</em>
                 </h2>
               </div>
@@ -159,10 +143,10 @@ export default function Page() {
             </div>
           </Reveal>
 
-          <div className="grid items-start gap-12 md:grid-cols-[1.35fr_.9fr] md:gap-20">
+          <div className="grid gap-12 md:grid-cols-[1.35fr_.9fr] md:items-stretch md:gap-20">
             <RevealStagger className="grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-line bg-line">
               {WHY.map((p) => (
-                <RevealItem key={p.n} className="flex min-h-[240px] flex-col gap-3.5 bg-bg p-8 px-7">
+                <RevealItem key={p.n} className="flex flex-col gap-3.5 bg-bg p-8 px-7">
                   <span className="font-serif text-[32px] font-normal italic leading-none text-accent">{p.n}</span>
                   <h3 className="m-0 font-serif text-[22px] font-normal leading-[1.18] tracking-[-.005em]">{p.title}</h3>
                   <p className="m-0 text-[14px] leading-[1.6] text-ink-dim">{p.text}</p>
@@ -170,7 +154,7 @@ export default function Page() {
               ))}
             </RevealStagger>
 
-            <ClipReveal className="relative aspect-[3/4] overflow-hidden rounded-[8px] bg-panel">
+            <ClipReveal className="relative overflow-hidden rounded-[8px] bg-panel min-h-[480px] md:min-h-0">
               <Image
                 src="/assets/designer-white.jpeg"
                 alt="Валентина Захрялова"
@@ -194,25 +178,27 @@ export default function Page() {
         </div>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS — full-bleed (no max-width on grid) */}
       <section id="projects" className="pb-[140px] max-md:pb-20">
         <div className="mx-auto max-w-[1280px] px-8">
           <Reveal>
             <div className="mb-14 flex flex-wrap items-end justify-between gap-8">
               <div>
                 <span className="eyebrow">Наши проекты</span>
-                <h2 className="h-section mt-4">
+                <h2 className="h-section mt-5">
                   Реализованные <em>интерьеры</em>
                 </h2>
               </div>
               <a href="#" className="btn-ghost">Все проекты →</a>
             </div>
           </Reveal>
+        </div>
 
-          <RevealStagger className="grid grid-cols-1 gap-px overflow-hidden rounded-[8px] border border-line bg-line md:grid-cols-2">
+        <div className="px-8 max-md:px-4">
+          <RevealStagger className="mx-auto grid max-w-[1640px] grid-cols-1 gap-px overflow-hidden rounded-[8px] border border-line bg-line md:grid-cols-2">
             {PROJECTS.map((p) => (
               <RevealItem key={p.title} className="group flex flex-col bg-panel">
-                <div className="relative aspect-[4/3] overflow-hidden vl-tint">
+                <div className="relative aspect-[16/10] overflow-hidden vl-tint">
                   <Image
                     src={p.src}
                     alt={p.title}
@@ -236,19 +222,20 @@ export default function Page() {
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* SERVICES — new lede, heading with explicit break */}
       <section id="services" className="pb-[140px] max-md:pb-20">
         <div className="mx-auto max-w-[1280px] px-8">
           <Reveal>
             <div className="mb-16 grid items-end gap-12 md:grid-cols-[1.1fr_1fr] md:gap-20">
               <div>
                 <span className="eyebrow">Услуги</span>
-                <h2 className="h-section mt-4">
-                  Давайте подберём услугу <em>под ваш запрос</em>
+                <h2 className="h-section mt-5">
+                  Давайте подберём услугу<br />
+                  <em>под ваш запрос</em>
                 </h2>
               </div>
               <p className="lede">
-                Шесть форматов сотрудничества&nbsp;— от&nbsp;планировочного решения за&nbsp;неделю до&nbsp;полного авторского надзора. Без&nbsp;«полного пакета», если он&nbsp;вам не&nbsp;нужен.
+                От&nbsp;планировочного решения до&nbsp;проекта под&nbsp;ключ с&nbsp;авторским надзором. Шесть форматов&nbsp;— выбирайте под&nbsp;свою задачу и&nbsp;бюджет.
               </p>
             </div>
           </Reveal>
@@ -263,7 +250,7 @@ export default function Page() {
                 <h3 className="m-0 mb-2.5 mt-4 font-serif text-[30px] font-normal leading-[1.12] tracking-[-.005em]">
                   {s.title}
                 </h3>
-                <p className="m-0 mb-auto text-[14px] leading-[1.6] text-ink-dim">{s.desc}</p>
+                <p className={`m-0 mb-auto text-[14px] leading-[1.6] ${s.pending ? "italic text-ink-mute" : "text-ink-dim"}`}>{s.desc}</p>
                 <div className="mt-8 flex items-end justify-between border-t border-line-2 pt-6">
                   <div>
                     <div className="mb-1 text-[11px] uppercase tracking-[.16em] text-ink-mute">от</div>
@@ -285,9 +272,9 @@ export default function Page() {
         </div>
       </section>
 
-      {/* BIG CTA */}
+      {/* BIG CTA — symmetric vertical padding, centered buttons same width */}
       <Reveal>
-        <section className="mx-auto my-[60px] max-w-[1280px] px-8">
+        <section className="mx-auto max-w-[1280px] px-8 pb-[140px] max-md:pb-20">
           <div
             className="relative grid items-center gap-12 overflow-hidden rounded-[120px] border border-line-2 px-20 py-14 max-md:rounded-[32px] max-md:p-7 md:grid-cols-[1fr_auto]"
             style={{ background: "linear-gradient(135deg,#272320 0%,#1f1c19 100%)" }}
@@ -305,23 +292,23 @@ export default function Page() {
                 Покажите планировку или&nbsp;опишите задачу&nbsp;— я&nbsp;перезвоню в&nbsp;течение 30&nbsp;минут, обсудим проект и&nbsp;пришлю коммерческое предложение в&nbsp;тот&nbsp;же день.
               </div>
             </div>
-            <div className="relative flex flex-col items-end gap-3.5 max-md:items-start">
-              <Magnetic strength={0.22}>
-                <a href="#cta" className="btn-primary btn-lg">Записаться →</a>
+            <div className="relative flex w-[260px] flex-col items-stretch gap-3.5 max-md:w-full">
+              <Magnetic strength={0.22} className="w-full">
+                <a href="#cta" className="btn-primary btn-lg w-full justify-center">Записаться →</a>
               </Magnetic>
-              <a href="tel:+79829610131" className="btn-ghost">+7 982 961 01 31</a>
+              <a href="tel:+79829610131" className="btn-ghost w-full justify-center">+7 982 961 01 31</a>
             </div>
           </div>
         </section>
       </Reveal>
 
-      {/* STEPS */}
+      {/* STEPS — 6 steps, no "Закупка и логистика", with "Выдача альбома" */}
       <section id="process" className="pb-[140px] max-md:pb-20">
         <div className="mx-auto max-w-[1280px] px-8">
           <Reveal>
             <div className="mb-16">
               <span className="eyebrow">Этапы работы</span>
-              <h2 className="h-section mt-4">
+              <h2 className="h-section mt-5">
                 От&nbsp;первого замера <em>до&nbsp;последнего штриха</em>
               </h2>
             </div>
@@ -350,7 +337,7 @@ export default function Page() {
           <Reveal>
             <div className="mb-14">
               <span className="eyebrow">Отзывы</span>
-              <h2 className="h-section mt-4">
+              <h2 className="h-section mt-5">
                 Что&nbsp;говорят <em>о&nbsp;работе</em>
               </h2>
             </div>
@@ -389,7 +376,7 @@ export default function Page() {
           <Reveal>
             <div>
               <span className="eyebrow">Есть вопросы?</span>
-              <h2 className="h-section mt-4">
+              <h2 className="h-section mt-5">
                 Напишите мне&nbsp;— <em>отвечу лично</em>
               </h2>
               <p className="lede mt-6">
@@ -418,25 +405,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER — trimmed (no brand+quote column) */}
       <footer id="contacts" className="border-t border-line bg-bg pb-9 pt-20 max-md:pt-16">
         <div className="mx-auto max-w-[1280px] px-8">
-          <div className="mb-16 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-            <div>
-              <a href="#" className="inline-block">
-                <Image
-                  src="/assets/logo-valentina.png"
-                  alt="Valentina"
-                  width={160}
-                  height={80}
-                  className="h-20 w-auto"
-                  style={{ filter: "brightness(0) invert(1)" }}
-                />
-              </a>
-              <p className="mt-6 max-w-[36ch] font-serif text-[20px] italic leading-[1.5] text-ink-dim">
-                «Дом должен взрослеть вместе с&nbsp;вами&nbsp;— не&nbsp;становиться музеем».
-              </p>
-            </div>
+          <div className="mb-16 grid gap-12 md:grid-cols-3">
             <div>
               <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Связаться</h5>
               <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
@@ -485,12 +457,16 @@ export default function Page() {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavPill({ href, children, active }: { href: string; children: React.ReactNode; active?: boolean }) {
   return (
-    <li>
+    <li className="flex-1">
       <a
         href={href}
-        className="inline-block rounded-full px-4 py-2.5 tracking-[.04em] transition hover:bg-white/[.04] hover:text-ink"
+        className={`block w-full rounded-full px-4 py-2.5 text-center tracking-[.04em] transition ${
+          active
+            ? "bg-grey text-ink hover:bg-accent hover:text-[#1a1a1a]"
+            : "hover:bg-white/[.05] hover:text-ink"
+        }`}
         style={{ fontWeight: 400 }}
       >
         {children}
