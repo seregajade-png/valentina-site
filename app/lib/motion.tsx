@@ -291,8 +291,10 @@ export function Magnetic({
   }, [strength, x, y]);
 
   return (
-    <div ref={ref} className={className} style={{ display: "inline-flex" }}>
-      <motion.div style={{ x: sx, y: sy }}>{children}</motion.div>
+    <div ref={ref} className={`inline-block ${className ?? ""}`}>
+      <motion.div className="block w-full" style={{ x: sx, y: sy }}>
+        {children}
+      </motion.div>
     </div>
   );
 }

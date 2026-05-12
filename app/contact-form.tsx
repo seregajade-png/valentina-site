@@ -27,7 +27,7 @@ export function ContactForm() {
       <select className="vl-field" defaultValue="">
         <option value="" disabled>Какая услуга интересует?</option>
         <option>Планировочное решение</option>
-        <option>Смарт-проект с ПИ</option>
+        <option>Смарт-проект с ИИ</option>
         <option>Эскизный проект с визуализацией</option>
         <option>Эскизный проект с чертежами</option>
         <option>Проект под ключ</option>
