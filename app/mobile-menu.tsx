@@ -98,8 +98,14 @@ export function MobileMenu() {
             >
               +7 978 942 55 95
             </a>
-            <div className="mt-4 text-[12px] text-ink-mute">
-              hello@valentina-design.ru<br />СПб · Большая Морская, 12
+            <div className="mt-5 flex flex-col gap-2 text-[13px] text-ink-dim">
+              <a href="mailto:Valentina.design@mail.ru" className="hover:text-accent">Valentina.design@mail.ru</a>
+              <div className="flex flex-wrap gap-x-4 gap-y-2">
+                <a href="https://t.me/ValentinaDesign" target="_blank" rel="noopener noreferrer" className="hover:text-accent">Telegram</a>
+                <a href="https://max.ru/u/f9LHodD0cOKk92NT2lZcYkvVlD1vmPfKCrC9DvLjND4l_XNVsG9ZIDJNFJ4" target="_blank" rel="noopener noreferrer" className="hover:text-accent">MAX</a>
+                <a href="https://vk.com/valentina.design" target="_blank" rel="noopener noreferrer" className="hover:text-accent">ВКонтакте</a>
+              </div>
+              <span className="text-[12px] text-ink-mute">СПб · Большая Морская, 12</span>
             </div>
           </div>
         </motion.aside>

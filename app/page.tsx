@@ -408,18 +408,10 @@ export default function Page() {
         </div>
       </section>
 
-      {/* FOOTER — trimmed (no brand+quote column) */}
+      {/* FOOTER — nav left, contacts right (text links) */}
       <footer id="contacts" className="border-t border-line bg-bg pb-9 pt-20 max-md:pt-16">
         <div className="mx-auto max-w-[1280px] px-8">
-          <div className="mb-16 grid gap-12 md:grid-cols-3">
-            <div>
-              <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Связаться</h5>
-              <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
-                <li><a href="tel:+79789425595" className="hover:text-accent">+7 978 942 55 95</a></li>
-                <li><a href="mailto:hello@valentina-design.ru" className="hover:text-accent">hello@valentina-design.ru</a></li>
-                <li>СПб · Большая Морская, 12</li>
-              </ul>
-            </div>
+          <div className="mb-16 grid gap-12 md:grid-cols-2 md:gap-20">
             <div>
               <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Навигация</h5>
               <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
@@ -430,22 +422,16 @@ export default function Page() {
                 <li><a href="#reviews" className="hover:text-accent">Отзывы</a></li>
               </ul>
             </div>
-            <div>
-              <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Соцсети</h5>
-              <div className="flex gap-2">
-                <SocialLink label="Instagram">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
-                </SocialLink>
-                <SocialLink label="Telegram">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"><path d="M21 4 2 11l6 2 2 6 4-4 5 4 2-15z" /></svg>
-                </SocialLink>
-                <SocialLink label="WhatsApp">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-3.5-7.1L21 4l-1.1 3.5A9 9 0 0 1 21 12z" /><path d="M8 11c0 3 2 5 5 5l2-2-2-1-1 1c-1 0-2-1-2-2l1-1-1-2-2 2z" /></svg>
-                </SocialLink>
-                <SocialLink label="Pinterest">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><circle cx="12" cy="12" r="10" /><path d="M12 7v10M9 17l3-10 3 5" /></svg>
-                </SocialLink>
-              </div>
+            <div className="md:text-right">
+              <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Контакты</h5>
+              <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
+                <li><a href="tel:+79789425595" className="hover:text-accent">+7 978 942 55 95</a></li>
+                <li><a href="mailto:Valentina.design@mail.ru" className="hover:text-accent">Valentina.design@mail.ru</a></li>
+                <li><a href="https://t.me/ValentinaDesign" target="_blank" rel="noopener noreferrer" className="hover:text-accent">Telegram</a></li>
+                <li><a href="https://max.ru/u/f9LHodD0cOKk92NT2lZcYkvVlD1vmPfKCrC9DvLjND4l_XNVsG9ZIDJNFJ4" target="_blank" rel="noopener noreferrer" className="hover:text-accent">MAX</a></li>
+                <li><a href="https://vk.com/valentina.design" target="_blank" rel="noopener noreferrer" className="hover:text-accent">ВКонтакте</a></li>
+                <li>СПб · Большая Морская, 12</li>
+              </ul>
             </div>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8 text-[12px] text-ink-mute">
@@ -478,14 +464,3 @@ function NavPill({ href, children, active }: { href: string; children: React.Rea
   );
 }
 
-function SocialLink({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <a
-      href="#"
-      aria-label={label}
-      className="grid h-[38px] w-[38px] place-items-center rounded-full border border-line-2 text-ink-dim transition hover:border-accent hover:text-accent"
-    >
-      {children}
-    </a>
-  );
-}
