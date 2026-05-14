@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ContactForm } from "./contact-form";
 import { HeroSlideshow } from "./hero-slideshow";
+import { MobileMenu } from "./mobile-menu";
 import { ClipReveal, Magnetic, MotionPhoto, Reveal, RevealItem, RevealStagger } from "./lib/motion";
 
 const NB = " ";
@@ -91,18 +92,20 @@ export default function Page() {
         className="sticky top-0 z-50 border-b border-line backdrop-blur-md"
         style={{ background: "rgba(26,26,26,.82)" }}
       >
-        <div className="mx-auto flex h-24 max-w-[1280px] items-center gap-4 px-8 max-md:gap-3">
+        <div className="mx-auto flex h-24 max-w-[1280px] items-center gap-4 px-8 max-md:gap-3 max-md:h-20">
           <ul className="flex flex-1 list-none items-center gap-1.5 p-1 m-0 rounded-full border border-line-2 text-[13px] text-ink-dim max-md:hidden">
             <NavPill href="#about">Мы</NavPill>
             <NavPill href="#projects">Проекты</NavPill>
             <NavPill href="#services">Услуги</NavPill>
             <NavPill href="#cta" active>Контакты</NavPill>
           </ul>
-          <Magnetic strength={0.18}>
+          <span className="flex-1 font-serif text-[22px] italic text-ink md:hidden">Valentina</span>
+          <Magnetic strength={0.18} className="max-md:hidden">
             <a href="tel:+79829610131" className="btn-primary">
               +7 982 961 01 31
             </a>
           </Magnetic>
+          <MobileMenu />
         </div>
       </nav>
 
@@ -144,9 +147,9 @@ export default function Page() {
           </Reveal>
 
           <div className="grid gap-12 md:grid-cols-[1.35fr_.9fr] md:items-stretch md:gap-20">
-            <RevealStagger className="grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-line bg-line">
+            <RevealStagger className="grid grid-cols-1 gap-px overflow-hidden rounded-[8px] border border-line bg-line sm:grid-cols-2">
               {WHY.map((p) => (
-                <RevealItem key={p.n} className="flex flex-col gap-3.5 bg-bg p-8 px-7">
+                <RevealItem key={p.n} className="flex flex-col gap-3.5 bg-bg p-8 px-7 max-md:p-6 max-md:px-6">
                   <span className="font-serif text-[32px] font-normal italic leading-none text-accent">{p.n}</span>
                   <h3 className="m-0 font-serif text-[22px] font-normal leading-[1.18] tracking-[-.005em]">{p.title}</h3>
                   <p className="m-0 text-[14px] leading-[1.6] text-ink-dim">{p.text}</p>
