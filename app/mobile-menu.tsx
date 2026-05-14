@@ -92,11 +92,11 @@ export function MobileMenu() {
 
           <div className="mt-auto pt-8">
             <a
-              href="tel:+79829610131"
+              href="tel:+79789425595"
               onClick={() => setOpen(false)}
               className="btn-primary btn-lg w-full justify-center"
             >
-              +7 982 961 01 31
+              +7 978 942 55 95
             </a>
             <div className="mt-4 text-[12px] text-ink-mute">
               hello@valentina-design.ru<br />СПб · Большая Морская, 12

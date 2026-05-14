@@ -101,8 +101,8 @@ export default function Page() {
           </ul>
           <span className="flex-1 font-serif text-[22px] italic text-ink md:hidden">Valentina</span>
           <Magnetic strength={0.18} className="max-md:hidden">
-            <a href="tel:+79829610131" className="btn-primary">
-              +7 982 961 01 31
+            <a href="tel:+79789425595" className="btn-primary">
+              +7 978 942 55 95
             </a>
           </Magnetic>
           <MobileMenu />
@@ -299,7 +299,7 @@ export default function Page() {
               <Magnetic strength={0.22} className="w-full">
                 <a href="#cta" className="btn-primary btn-lg w-full justify-center">Записаться →</a>
               </Magnetic>
-              <a href="tel:+79829610131" className="btn-ghost w-full justify-center">+7 982 961 01 31</a>
+              <a href="tel:+79789425595" className="btn-ghost w-full justify-center">+7 978 942 55 95</a>
             </div>
           </div>
         </section>
@@ -415,7 +415,7 @@ export default function Page() {
             <div>
               <h5 className="m-0 mb-5 text-[11px] font-normal uppercase tracking-[.22em] text-ink-mute">Связаться</h5>
               <ul className="m-0 flex list-none flex-col gap-3 p-0 text-[14px] text-ink-dim">
-                <li><a href="tel:+79829610131" className="hover:text-accent">+7 982 961 01 31</a></li>
+                <li><a href="tel:+79789425595" className="hover:text-accent">+7 978 942 55 95</a></li>
                 <li><a href="mailto:hello@valentina-design.ru" className="hover:text-accent">hello@valentina-design.ru</a></li>
                 <li>СПб · Большая Морская, 12</li>
               </ul>
