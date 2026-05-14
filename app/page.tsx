@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ContactForm } from "./contact-form";
+import { FloatingMessengers } from "./floating-messengers";
 import { HeroSlideshow } from "./hero-slideshow";
 import { MobileMenu } from "./mobile-menu";
 import { ClipReveal, Magnetic, MotionPhoto, Reveal, RevealItem, RevealStagger } from "./lib/motion";
@@ -442,6 +443,8 @@ export default function Page() {
           </div>
         </div>
       </footer>
+
+      <FloatingMessengers />
     </>
   );
 }
